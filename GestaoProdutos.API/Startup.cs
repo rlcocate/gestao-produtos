@@ -29,11 +29,7 @@ namespace GestaoProdutos.API
 
             services.AutoMapperConfiguration();
             services.AddInfrastructure();
-            //services.AddMediatR(c => c.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
-            }
+            services.AddMediatR(c => c.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
