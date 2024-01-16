@@ -19,7 +19,8 @@ namespace GestaoProdutos.Infra.Repositories
         }
         public async override Task<IReadOnlyList<Produto>> GetAllAsync(int limitePorPagina, int numeroDaPagina)
         {
-            return await _context.Set<Produto>().AsNoTracking()
+            return await _context.Set<Produto>().Include(p => p.Fornecedor)
+                .AsNoTracking()
                 .Where(p => p.Situacao == (char)SituacaoProdutoEnum.Ativo)
                 .Skip((numeroDaPagina - 1) * limitePorPagina).Take(limitePorPagina)
                 .ToListAsync();
@@ -27,7 +28,10 @@ namespace GestaoProdutos.Infra.Repositories
 
         public async Task<Produto> GetByCondition(Expression<Func<Produto, bool>> predicate)
         {
-            return await _context.Produtos.AsNoTracking().Where(predicate).FirstOrDefaultAsync();
+            return await _context.Produtos.Include(p => p.Fornecedor)
+                .AsNoTracking()
+                .Where(predicate)
+                .FirstOrDefaultAsync();
         }
     }
 }
