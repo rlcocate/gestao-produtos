@@ -95,34 +95,34 @@ namespace GestaoProdutos.Tests.Queries
         }
 
         //[Fact]
-        public async Task DeveriaRetornarUmProdutoAtivoPorId()
-        {
-            var produto = new Produto()
-            {
-                Descricao = "Buzina",
-                Situacao = (char)SituacaoProdutoEnum.Ativo,
-                DataFabricacao = DateTime.Now,
-                DataValidade = DateTime.Now.AddYears(5),
-                FornecedorId = 2,
-                Fornecedor = new Fornecedor()
-                {
-                    Descricao = "Dts",
-                    Cnpj = "86442724000100"
-                }
-            };
+        //public async Task DeveriaRetornarUmProdutoAtivoPorId()
+        //{
+        //    var produto = new Produto()
+        //    {
+        //        Descricao = "Buzina",
+        //        Situacao = (char)SituacaoProdutoEnum.Ativo,
+        //        DataFabricacao = DateTime.Now,
+        //        DataValidade = DateTime.Now.AddYears(5),
+        //        FornecedorId = 2,
+        //        Fornecedor = new Fornecedor()
+        //        {
+        //            Descricao = "Dts",
+        //            Cnpj = "86442724000100"
+        //        }
+        //    };
 
-            int id = 1;
-            _mockProdutoRepository.Setup(p => p.GetByCondition(w => w.Id.Equals(id) && w.Situacao.Equals((char)SituacaoProdutoEnum.Ativo))).ReturnsAsync(produto);
+        //    int id = 1;
+        //    _mockProdutoRepository.Setup(p => p.GetByCondition(w => w.Id.Equals(id) && w.Situacao.Equals((char)SituacaoProdutoEnum.Ativo))).ReturnsAsync(produto);
 
-            var query = new ObterProdutoPorIdQuery(id);
-            var handler = new ObterProdutoPorIdHandler(_mockUnitOfWork.Object, _mapper);
-            var result = await handler.Handle(query, new CancellationToken());
+        //    var query = new ObterProdutoPorIdQuery(id);
+        //    var handler = new ObterProdutoPorIdHandler(_mockUnitOfWork.Object, _mapper);
+        //    var result = await handler.Handle(query, new CancellationToken());
 
-            //TODO: Implementar
-            Assert.True(true);
+        //    //TODO: Implementar
+        //    Assert.True(true);
 
-            //Assert.NotNull(result);
-            //Assert.Single(result);
-        }
+        //    //Assert.NotNull(result);
+        //    //Assert.Single(result);
+        //}
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestaoProdutos.Infra.Repositories.UoW
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly GestaoProdutosContext _context;
 
