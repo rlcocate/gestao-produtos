@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GestaoProdutos.Core.DTO;
 using GestaoProdutos.Core.Entities;
+using GestaoProdutos.Core.Enums;
 using GestaoProdutos.Core.Repositories.UoW;
 using MediatR;
 using System.Threading;
@@ -21,7 +22,7 @@ namespace GestaoProdutos.Application.Queries.ObterProdutoPorId
 
         public async Task<ProdutoDTO> Handle(ObterProdutoPorIdQuery request, CancellationToken cancellationToken)
         {
-            Produto produto = await _unitOfWork.Produtos.GetByCondition(p => p.Id.Equals(request.Id));
+            Produto produto = await _unitOfWork.Produtos.GetByCondition(p => p.Id.Equals(request.Id) && p.Situacao.Equals((char)SituacaoProdutoEnum.Ativo));
             ProdutoDTO result = _mapper.Map<ProdutoDTO>(produto);
             return result;
         }
